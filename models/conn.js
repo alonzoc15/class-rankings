@@ -1,4 +1,4 @@
-const pgp = require('pg-promise') ({
+const pgp = require('pg-promise')({
     query: e => {
         console.log('QUERY:', e.query);
     }
@@ -6,7 +6,7 @@ const pgp = require('pg-promise') ({
 
 const options = {
     host: 'localhost',
-    database: 'digital_crafts_class',
+    database: 'class_status',
     user: 'ranger'
 }
 

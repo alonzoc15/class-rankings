@@ -3,8 +3,8 @@ create table class_status (
     status_title text not null, 
     rank integer);
 
-insert into class_status
-    (status_title, rank) 
+insert into class_status (status_title, rank) 
+
 values 
     ('Awesome', 5), 
     ('Great', 4),
@@ -12,7 +12,6 @@ values
     ('Okay', 2),
     ('Poor', 1),
     ('Unranked', 0);
-    
 
 create table topics (
     id serial primary key, 
