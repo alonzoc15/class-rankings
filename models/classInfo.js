@@ -17,7 +17,7 @@ class ClassInfo {
                     FROM topics 
                     INNER JOIN 
                     class_status on topics.status_id = class_status.id 
-                ORDER BY topics.id;`);
+                    ORDER BY topics.id;`);
             return response;
         } catch (err) {
             return err.message;
@@ -37,7 +37,6 @@ class ClassInfo {
         const query = `UPDATE topics SET status_id=${rank} WHERE topic_name = '${topic}'`
         try {
             const response = await db.result(query);
-            console.log("response is", response);
             return response;
         } catch (err) {
             console.log("ERROR", err.message);

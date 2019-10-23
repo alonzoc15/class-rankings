@@ -1,6 +1,17 @@
-const express = require('express'),
-    router = express.Router(),
-    ClassDataModel = require('../models/classInfo');
+const express = require('express');
+const router = express.Router();
+const ClassDataModel = require('../models/classInfo');
+
+const updateEach = async items => {
+    const entriesArray = Object.keys(items);
+
+    const results = await Promise.all(
+        entriesArray.map(key => {
+            return ClassDataModel.update(key, items[key]);
+        })
+    );
+    return results;
+};
 
 /* GET home page. */
 router.get('/', async(req, res, next) => {
@@ -19,15 +30,14 @@ router.get('/', async(req, res, next) => {
     });
 });
 
-router.post('/update', (req, res) => {
-    console.log(req.body);
+router.post('/update', async(req, res) => {
+    const addUpdatedValues = await updateEach(req.body);
 
-    for (let key in req.body) {
-        ClassDataModel.update(key, req.body[key]);
+    if (addUpdatedValues) {
+        res.status(200).redirect('/')
+    } else {
+        res.sendStatus(500);
     }
-
-    res.status(200).redirect('/');
 });
-
 
 module.exports = router;
